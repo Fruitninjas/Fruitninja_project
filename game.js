@@ -78,11 +78,11 @@ function updateGame() {
 
         //sprite
         x1++;
-        if(x1>30){
+        if(x1>10){
             x++;
             x1=0;
         }
-        if(x>5){
+        if(x>10){
             x=0;
         }
         //sprite
@@ -94,7 +94,15 @@ function draw() {
     context.clearRect(0, 0, canvas.width, canvas.height);       
     context.globalAlpha = 1;                                    
     if(IGame){
-        context.drawImage(Ninja,x*20,0,20,40, myX, myY, 50, 70);
+        if(!moveL && !moveR){
+            context.drawImage(Ninja,x*20,0,20,40, myX, myY, 50, 70);
+        }
+        if(moveR){
+            context.drawImage(Ninja,x*20,40,20,40, myX, myY, 50, 70);
+        
+        }if(moveL){
+            context.drawImage(Ninja,x*20,80,20,40, myX, myY, 50, 70);
+        }
     }
     
     requestAnimationFrame(draw);        
