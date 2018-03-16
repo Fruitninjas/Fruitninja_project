@@ -8,43 +8,97 @@ var canvas = document.getElementById("canvas-id");
 canvas.width = 800;
 canvas.height = 600;
 var context = canvas.getContext("2d");
-///NE BARAITE REDOVETE NAGORE!
-var gameOver=new Image;
-gameOver.src="maxresdefault.jpg";
-var yoda=new Image;
-yoda.src="imagesCAB0TPIV.jpg";
-var myX=10, myY=400,myDY=0,broiSkociOtkakSumStypil,mishkaX=0,mishkaY=0, jumpX=4000, jumpY=4000, jumpDY;  
-window.addEventListener("keyup", function (args) {    
-myDY=-10;
+var Ninja=new Image;
+Ninja.src="ninja_sprite.png";
+var IGame=false;
+var myX=10, myY=400,myDY=0,mouseX,mouseY;  
+var x=0,x1=0;
+var moveR = false,moveL = false;
+window.addEventListener("keydown", function (args) {   
+    var arg = args.keyCode;
+    console.log(arg);
+    if(IGame){
+        if(arg  == 87){ 
+            myDY=-10;
+        }
+        if(arg  == 65){ 
+            moveL = true;
+        }
+        if(arg  == 68){ 
+            moveR = true;
+        }
+    }
 }, false);
-
+window.addEventListener("keyup", function (args) {   
+    var arg = args.keyCode;
+    console.log(arg);
+    if(IGame){
+        if(arg  == 65){ 
+            moveL = false;
+        }
+        if(arg  == 68){ 
+            moveR = false;
+        }
+    }
+}, false);
+function InGame(){
+    IGame = true;
+}
 window.addEventListener("mousemove", function (args) {
-    mishkaX=args.clientX-canvas.offsetLeft;
-    mishkaY=args.clientY-canvas.offsetTop
+    mouseX=args.clientX-canvas.offsetLeft;
+    mouseY=args.clientY-canvas.offsetTop
    
 }, false);
 
 
-function update() {     
-myY=myY+myDY;
-myDY=myDY+0.2;
-if(myY>400){
-myY=400;
-myDY=0;
-}
-    setTimeout(update, 4); 
+function updateGame() {     
+    if(IGame){
+        
+        //move
+        if(moveL){
+            myX--;
+            myX--;
+            myX--;
+        }
+        if(moveR){
+            myX++;
+            myX++;
+            myX++;
+        }
+        //move
+        
+        //gravity
+        myY=myY+myDY;
+        myDY=myDY+0.4;
+        if(myY>400){
+            myY=400;
+            myDY=0;
+        }
+        //gravity
+
+        //sprite
+        x1++;
+        if(x1>30){
+            x++;
+            x1=0;
+        }
+        if(x>5){
+            x=0;
+        }
+        //sprite
+    }
+    setTimeout(updateGame, 10); 
 }
 
 function draw() {      
     context.clearRect(0, 0, canvas.width, canvas.height);       
     context.globalAlpha = 1;                                    
-
-    
-    context.fillStyle = "#FF0000";//izbor na cvqt
-    context.drawImage(yoda, myX, myY, 100, 150);
-
+    if(IGame){
+        context.drawImage(Ninja,x*20,0,20,40, myX, myY, 50, 70);
+    }
     
     requestAnimationFrame(draw);        
 }
-update();      
-draw(); 
+InGame();
+updateGame();      
+draw();
