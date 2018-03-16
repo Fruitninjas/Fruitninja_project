@@ -1,0 +1,26 @@
+body {
+	font-family: Arial;
+	font-size: 18px;
+	background: url('../img/background2.jpg') no-repeat center center fixed;
+}
+h1 { line-height: 1.4; }
+p { 
+	line-height: 1.8;
+	margin-bottom: 0;
+}
+
+.game {
+    background: url("../img/bg1.png");
+    background-repeat: no-repeat;
+    background-size: 150%;
+    margin-right : 23.5%;
+    margin-left : 23.5%;
+    width : 50;
+}
+.logo {
+    margin-top : 1%;
+    margin-right : 20%;
+    margin-left : 33%;
+
+}
+
