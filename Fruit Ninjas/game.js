@@ -359,23 +359,25 @@ function updateGame() {
         //move
         
         //gravity
-        myY=myY+myDY;
+        for(var i=0;i<Math.abs(myDY);i++){
+            myY+=myDY / Math.abs(myDY);
+        }
         myDY=myDY+0.5;
         if(myY>600){
             myY=-100;
             myDY=0;
             if(heard >= 1){
                 myY = -100;
-                jumps = 0;
+                jumps = 3;
                 heard--;
             }else{
-                jumps = 0;
+                jumps = 3;
                 IGame = false;
                 PalseMenue = true;
             }
         }
         if(myY == 800){
-            jumps = 0;
+            jumps = 3;
         }
         //gravity
 
