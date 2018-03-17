@@ -11,7 +11,7 @@ p {
 
 .game {
     background: url("../img/bg1.png");
-    background-repeat: no-repeat;
+    background-repeat: no-repeat center center fixed;
     background-size: 100%;
     margin-right : 23.5%;
     margin-left : 23.5%;
@@ -19,7 +19,8 @@ p {
 }
 .logo {
     margin-top : 1%;
-    
+    margin-right : 20%;
+    margin-left : 31.5%;
 
 }
 

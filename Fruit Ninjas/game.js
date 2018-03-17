@@ -496,34 +496,34 @@ function draw() {
         var scs = score;
         for(var i=0;scs>0;i++){
             if(scs%10 == 1){
-                context.drawImage(nums,0,0,43,65,800-i*21-1,1,20,30);
+                context.drawImage(nums,0,0,43,65,700-i*20,0,20,30);
             }
             if(scs%10 == 2){
-                context.drawImage(nums,43,0,43,65,800-i*21-1,1,20,30);
+                context.drawImage(nums,43,0,43,65,700-i*20,0,20,30);
             }
             if(scs%10 == 3){
-                context.drawImage(nums,86,0,43,65,800-i*21-1,1,20,30);
+                context.drawImage(nums,86,0,43,65,700-i*20,0,20,30);
             }
             if(scs%10 == 4){
-                context.drawImage(nums,129,0,43,65,800-i*21-1,1,20,30);
+                context.drawImage(nums,129,0,43,65,700-i*20,0,20,30);
             }
             if(scs%10 == 5){
-                context.drawImage(nums,172,0,43,65,800-i*21-1,1,20,30);
+                context.drawImage(nums,172,0,43,65,700-i*20,0,20,30);
             }
             if(scs%10 == 6){
-                context.drawImage(nums,215,0,43,65,800-i*21-1,1,20,30);
+                context.drawImage(nums,215,0,43,65,700-i*20,0,20,30);
             }
             if(scs%10 == 7){
-                context.drawImage(nums,258,0,43,65,800-i*21-1,1,20,30);
+                context.drawImage(nums,258,0,43,65,700-i*20,0,20,30);
             }
             if(scs%10 == 8){
-                context.drawImage(nums,301,0,43,65,800-i*21-1,1,20,30);
+                context.drawImage(nums,301,0,43,65,700-i*20,0,20,30);
             }
             if(scs%10 == 9){
-                context.drawImage(nums,344,0,43,65,800-i*21-1,1,20,30);
+                context.drawImage(nums,344,0,43,65,700-i*20,0,20,30);
             }
             if(scs%10 == 0){
-                context.drawImage(nums,387,0,43,65,800-i*21-1,1,20,30);
+                context.drawImage(nums,387,0,43,65,700-i*20,0,20,30);
             }
             scs=Math.floor(scs/10);
         }   
