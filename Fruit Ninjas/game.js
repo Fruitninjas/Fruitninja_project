@@ -221,7 +221,8 @@ var map1 = [
 ];
 
 
-
+var shbr1 = 0;
+var shBrSS = 0;
 var IGame=false;
 var myX=10, myY=-400,myDY=0,mouseX,mouseY;  
 var x=0,x1=0;
@@ -230,7 +231,7 @@ var sball = false,rotatedR = true;
 var moveR = false,moveL = false;
 window.addEventListener("keydown", function (args) {   
     var arg = args.keyCode;
-    console.log(arg);
+    //console.log(arg);
     if(IGame){
         if(arg  == 87 && jumps < 2){
             if(!sball){
@@ -256,12 +257,13 @@ window.addEventListener("keydown", function (args) {
         if(arg  == 32){ 
             sball = !sball;
         }   
-        if(arg  == 39){ 
-            map[Math.floor((myX+50)/20) + 1][Math.floor((myY+70)/20)] = 6;
-        }   
-        if(arg  == 37){ 
-            map[Math.floor((myX+50)/20) - 1][Math.floor((myY+70)/20)] = 6;
-        }   
+        if(arg  == 39){
+            var shx =  Math.floor((myX+50)/20) + 1;
+            var shy =  Math.floor((myY+70)/20);
+            if(map[shy][shx] == 0){
+                map[Math.floor((myY+35)/20)][Math.floor((myX+25)/20) + 1] = 6;
+            }
+        }  
     }
     if(PalseMenue){
         if(arg == 82){
@@ -286,7 +288,7 @@ window.addEventListener("keydown", function (args) {
 }, false);
 window.addEventListener("keyup", function (args) {   
     var arg = args.keyCode;
-    console.log(arg);
+    //console.log(arg);
     if(IGame){
         if(arg  == 65){ 
             moveL = false;
@@ -396,33 +398,47 @@ function updateGame() {
             for(var i=0;i<30;i++){
                 for(var j=0;j<40;j++){
                     if(j==39){
-                        try {
-                            map[i][j] = map1[map1br1][i][map1BrT]; 
-                        }
-                        catch (err) {
-                            console.log(err)
-                            if (err) {
-                            console.log(map);
-                            console.log("i "+ i);
-                            console.log(j);
-                            console.log(map1BrT);
-                            console.log(map1br1);
-                            }
-                           
-                        }
+                        map[i][j] = map1[map1br1][i][map1BrT]; 
+                        
                     }else{
                         map[i][j] = map[i][j+1];
                     }
                 }
             }
+            var shSpeed = 3;
+            for(var i=0;i<30;i++){
+                for(var j=39;j>=0;j--){
+                    if(map[i][j] == 6 || map[i][j] == 7 || map[i][j] == 8){
+                        var isFree = true;
+                        for(var k=j+1;k <= j+shSpeed;k++){
+                            if(k > 39){
+                                isFree=false;
+                                break;
+                            }
+                            if(map[i][k] != 0){
+                                isFree = false;
+                                if(map[i][k] == 5){
+                                    map[i][k] = 0;
+                                }
+                                
+                            }
+                        }
+                        if(isFree){
+                            map[i][j + shSpeed] = map[i][j] == 8 ? 6: map[i][j] + 1;
+                        }
+                        map[i][j] = 0;
+                    }
+                }
+            }
 
-        if(!moveR && !moveL){
-            sball = false;
+
+            if(!moveR && !moveL){
+                sball = false;
+            }
+            if(heard <= 0){myY = 700;}
+            score++;
+            console.log(score);
         }
-        if(heard <= 0){myY = 700;}
-        score++;
-        console.log(score);
-    }
 
 
         //sprite
@@ -433,10 +449,9 @@ function updateGame() {
     setTimeout(updateGame, 10); 
 }
 
-function draw() {      
-    context.clearRect(0, 0, canvas.width, canvas.height);       
-    context.globalAlpha = 1; 
-
+function draw() {
+        context.clearRect(0, 0, canvas.width, canvas.height);       
+        context.globalAlpha = 1;
         for(var i =0 ;i<heard;i++){
             context.drawImage(heardImg,i*40,0,40,40);
         }
@@ -458,8 +473,8 @@ function draw() {
                 if(map[i][j] == 5){
                     context.drawImage(Samuri,x*32,0,32,40,(j*20) - 24,(i*20)-60,64,80);
                 }
-                if(map[i][j] == 6){
-                    context.drawImage(Samuri,x*32,0,32,40,(j*20) - 24,(i*20)-60,64,80);
+                if(map[i][j] == 6 || map[i][j] == 7 || map[i][j] == 8){
+                    context.drawImage(Shuriken,(map[i][j]-6)*15,0,15,15,(j*20),(i*20),20,20);
                 }
             }
         }
@@ -495,35 +510,36 @@ function draw() {
         }
         var scs = score;
         for(var i=0;scs>0;i++){
+            var w = 780;
             if(scs%10 == 1){
-                context.drawImage(nums,0,0,43,65,800-i*21-1,1,20,30);
+                context.drawImage(nums,0,0,43,65,w-i*21-1,1,20,30);
             }
             if(scs%10 == 2){
-                context.drawImage(nums,43,0,43,65,800-i*21-1,1,20,30);
+                context.drawImage(nums,43,0,43,65,w-i*21-1,1,20,30);
             }
             if(scs%10 == 3){
-                context.drawImage(nums,86,0,43,65,800-i*21-1,1,20,30);
+                context.drawImage(nums,86,0,43,65,w-i*21-1,1,20,30);
             }
             if(scs%10 == 4){
-                context.drawImage(nums,129,0,43,65,800-i*21-1,1,20,30);
+                context.drawImage(nums,129,0,43,65,w-i*21-1,1,20,30);
             }
             if(scs%10 == 5){
-                context.drawImage(nums,172,0,43,65,800-i*21-1,1,20,30);
+                context.drawImage(nums,172,0,43,65,w-i*21-1,1,20,30);
             }
             if(scs%10 == 6){
-                context.drawImage(nums,215,0,43,65,800-i*21-1,1,20,30);
+                context.drawImage(nums,215,0,43,65,w-i*21-1,1,20,30);
             }
             if(scs%10 == 7){
-                context.drawImage(nums,258,0,43,65,800-i*21-1,1,20,30);
+                context.drawImage(nums,258,0,43,65,w-i*21-1,1,20,30);
             }
             if(scs%10 == 8){
-                context.drawImage(nums,301,0,43,65,800-i*21-1,1,20,30);
+                context.drawImage(nums,301,0,43,65,w-i*21-1,1,20,30);
             }
             if(scs%10 == 9){
-                context.drawImage(nums,344,0,43,65,800-i*21-1,1,20,30);
+                context.drawImage(nums,344,0,43,65,w-i*21-1,1,20,30);
             }
             if(scs%10 == 0){
-                context.drawImage(nums,387,0,43,65,800-i*21-1,1,20,30);
+                context.drawImage(nums,387,0,43,65,w-i*21-1,1,20,30);
             }
             scs=Math.floor(scs/10);
         }   
