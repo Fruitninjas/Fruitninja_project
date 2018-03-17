@@ -12,15 +12,14 @@ p {
 .game {
     background: url("../img/bg1.png");
     background-repeat: no-repeat;
-    background-size: 150%;
+    background-size: 100%;
     margin-right : 23.5%;
     margin-left : 23.5%;
-    width : 50;
+    width : 53%;
 }
 .logo {
     margin-top : 1%;
-    margin-right : 20%;
-    margin-left : 33%;
+    
 
 }
 
