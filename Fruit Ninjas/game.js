@@ -258,10 +258,19 @@ window.addEventListener("keydown", function (args) {
             sball = !sball;
         }   
         if(arg  == 39){
-            var shx =  Math.floor((myX+50)/20) + 1;
-            var shy =  Math.floor((myY+70)/20);
+            var shx =  Math.floor((myX+35)/20) + 1;
+            var shy =  Math.floor((myY+25)/20);
             if(map[shy][shx] == 0){
-                map[Math.floor((myY+35)/20)][Math.floor((myX+25)/20) + 1] = 6;
+                map[shy][shx] = 6;
+            }
+            if(map[shy][shx] == 5){
+                map[shy][shx] = 0;
+            }
+            if(map[shy+1][shx] == 5){
+                map[shy+1][shx] = 0;
+            }
+            if(map[shy+2][shx] == 5){
+                map[shy+2][shx] = 0;
             }
         }  
     }
@@ -417,12 +426,17 @@ function updateGame() {
                                 isFree=false;
                                 break;
                             }
-                            if(map[i][k] != 0){
+                            if(map[i][k] != 0 || map[i+1][k] == 5 || map[i+2][k] == 5){
                                 isFree = false;
                                 if(map[i][k] == 5){
                                     map[i][k] = 0;
                                 }
-                                
+                                if(map[i+1][k] == 5){
+                                    map[i+1][k] = 0;
+                                }
+                                if(map[i+2][k] == 5){
+                                    map[i+2][k] = 0;
+                                }
                             }
                         }
                         if(isFree){
@@ -461,22 +475,22 @@ function draw() {
         for(var i=0;i<30;i++){
             for(var j=0;j<40;j++){
                 if(map[i][j] == 1){
-                    context.drawImage(BEG, j*20,i*20,20,20);
+                    context.drawImage(BEG, j*20 + 10 - x1,i*20,20,20);
                 }
                 if(map[i][j] == 2){
-                    context.drawImage(MID, j*20,i*20,20,20);
+                    context.drawImage(MID, j*20 + 10 - x1,i*20,20,20);
                 }
                 if(map[i][j] == 3){
-                    context.drawImage(END, j*20,i*20,20,20);
+                    context.drawImage(END, j*20 + 10 - x1,i*20,20,20);
                 }
                 if(map[i][j] == 4){
-                    context.drawImage(chest,0,0,50,37, j*20,(i-1)*20,40,40);
+                    context.drawImage(chest,0,0,50,37, j*20 + 10 - x1,(i-1)*20,40,40);
                 }
                 if(map[i][j] == 5){
-                    context.drawImage(Samuri,x*32,0,32,40,(j*20) - 24,(i*20)-60,64,80);
+                    context.drawImage(Samuri,x*32,0,32,40,(j*20) - 24 + 10 - x1,(i*20)-60,64,80);
                 }
                 if(map[i][j] == 6 || map[i][j] == 7 || map[i][j] == 8){
-                    context.drawImage(Shuriken,(map[i][j]-6)*15,0,15,15,(j*20),(i*20),20,20);
+                    context.drawImage(Shuriken,(map[i][j]-6)*15,0,15,15,(j*20) + 10 - x1,(i*20),20,20);
                 }
             }
         }
