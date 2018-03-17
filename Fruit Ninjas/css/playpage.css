@@ -1,0 +1,60 @@
+body {
+	font-family: Arial;
+	font-size: 18px;
+	background: url('../img/background.jpg') no-repeat center center fixed;
+}
+h1 { line-height: 1.4; }
+p { 
+	line-height: 1.8;
+	margin-bottom: 0;
+}
+
+.site_background {
+    background-color: white;
+    max-width: 1120px;
+    padding: 0;
+    margin: 0 auto;  
+}
+
+
+
+
+.site-header {
+	background: url('../img/Capture.png') no-repeat;
+	background-size: cover;
+	height: 200px;
+	padding: 60px 80px;
+	position: relative;
+	border-bottom: 10px solid #076599;
+}
+
+
+
+
+
+
+@media (min-width: 576px) {
+	.content { padding: 75px 50px 70px;	}
+
+
+}
+
+
+
+@media (min-width: 1020px) {
+	.site-header { height: 460px; }
+
+}
+.button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 50px 400px;
+    cursor: pointer;
+}
+

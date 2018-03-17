@@ -116,7 +116,7 @@ function updateGame() {
             if(map1[i][j] == 1 ||map1[i][j] == 2 ||map1[i][j] == 3){
                 if((myX >= j*20 && myX <= (j+1)*20) ||((myX+50) >= j*20 && (myX+50) <= (j+1)*20)){
                     if((myY+70) <= (i+1)*20 && (myY+70) > i*20){
-                        myY = i*20 - 7;
+                        myY = i*20 - 70;
                         myDY = 0;
                         jumps =0;
                     }
