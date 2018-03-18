@@ -8,6 +8,7 @@ var canvas = document.getElementById("canvas-id");
 canvas.width = 800;
 canvas.height = 600;
 var context = canvas.getContext("2d");
+var Music = new Audio("mp3.mp3");
 var Ninja=new Image;
 Ninja.src="ninja_sprite.png";
 var BEG=new Image;
@@ -257,20 +258,23 @@ window.addEventListener("keydown", function (args) {
         if(arg  == 32){ 
             sball = !sball;
         }   
-        if(arg  == 39){
-            var shx =  Math.floor((myX+35)/20) + 1;
-            var shy =  Math.floor((myY+25)/20);
-            if(map[shy][shx] == 0){
-                map[shy][shx] = 6;
-            }
-            if(map[shy][shx] == 5){
-                map[shy][shx] = 0;
-            }
-            if(map[shy+1][shx] == 5){
-                map[shy+1][shx] = 0;
-            }
-            if(map[shy+2][shx] == 5){
-                map[shy+2][shx] = 0;
+        if(arg  == 16){
+            if(SHbr > 0){
+                SHbr--;
+                var shx =  Math.floor((myX+35)/20) + 1;
+                var shy =  Math.floor((myY+25)/20);
+                if(map[shy][shx] == 0){
+                    map[shy][shx] = 6;
+                }
+                if(map[shy][shx] == 5){
+                    map[shy][shx] = 0;
+                }
+                if(map[shy+1][shx] == 5){
+                    map[shy+1][shx] = 0;
+                }
+                if(map[shy+2][shx] == 5){
+                    map[shy+2][shx] = 0;
+                }
             }
         }  
     }
@@ -297,7 +301,7 @@ window.addEventListener("keydown", function (args) {
 }, false);
 window.addEventListener("keyup", function (args) {   
     var arg = args.keyCode;
-    //console.log(arg);
+    console.log(arg);
     if(IGame){
         if(arg  == 65){ 
             moveL = false;
@@ -309,9 +313,11 @@ window.addEventListener("keyup", function (args) {
 }, false);
 function InGame(){
     IGame = true;
+    Music.play();
 }
 function STSC(){
     Stsc = false;
+    Music.pause();
 }
 window.addEventListener("mousemove", function (args) {
     mouseX=args.clientX-canvas.offsetLeft;
@@ -558,7 +564,47 @@ function draw() {
                 context.drawImage(nums,387,0,43,65,w-i*21-1,1,20,30);
             }
             scs=Math.floor(scs/10);
-        }   
+        } 
+        var scs = SHbr;
+        var d;
+        for(d=0;scs>0;d++){
+            var w = 780;
+            if(scs%10 == 1){
+                context.drawImage(nums,0,0,43,65,w-d*21-1,32,20,30);
+            }
+            if(scs%10 == 2){
+                context.drawImage(nums,43,0,43,65,w-d*21-1,32,20,30);
+            }
+            if(scs%10 == 3){
+                context.drawImage(nums,86,0,43,65,w-d*21-1,32,20,30);
+            }
+            if(scs%10 == 4){
+                context.drawImage(nums,129,0,43,65,w-d*21-1,32,20,30);
+            }
+            if(scs%10 == 5){
+                context.drawImage(nums,172,0,43,65,w-d*21-1,32,20,30);
+            }
+            if(scs%10 == 6){
+                context.drawImage(nums,215,0,43,65,w-d*21-1,32,20,30);
+            }
+            if(scs%10 == 7){
+                context.drawImage(nums,258,0,43,65,w-d*21-1,32,20,30);
+            }
+            if(scs%10 == 8){
+                context.drawImage(nums,301,0,43,65,w-d*21-1,1,20,30);
+            }
+            if(scs%10 == 9){
+                context.drawImage(nums,344,0,43,65,w-d*21-1,1,20,30);
+            }
+            if(scs%10 == 0){
+                context.drawImage(nums,387,0,43,65,w-d*21-1,1,20,30);
+            }
+            scs=Math.floor(scs/10);
+        } 
+        if(SHbr > 0){
+            context.drawImage(Shuriken,0,0,15,15,w-((d)*21)-1,34,20,30);
+        }
+          
     
     }
     if(PalseMenue){
